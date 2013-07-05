@@ -39,7 +39,7 @@ genma() {
 
 
 _genma_help() {
-    echo "Go ENvironment MAnager v${version}"
+    echo "Go (virtual) ENvironment MAnager v${version}"
     echo
     echo "Usage: genma <command> [<args>]"
     echo
