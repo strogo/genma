@@ -30,7 +30,7 @@ genma() {
                 shift 1
                 $do_func "$@"
             else
-                echo "ERROR: Unknown \`$1' command"
+                echo "ERROR: Unknown '$1' command"
                 echo
             fi
             ;;
@@ -44,10 +44,10 @@ _genma_help() {
     echo "Usage: genma <command> [<args>]"
     echo
     echo "Commands:"
-    echo "  deactivate              Disable active virtual environment."
-    echo "  lsvirtualenv            List available virtual environments."
-    echo "  mkvirtualenv <name>     Create and activate new virtual environment."
-    echo "  rmvirtualenv <name>     Delete existing virtual environment."
+    echo "  deactivate              Disable active virtualenv."
+    echo "  lsvirtualenv            List available virtualenv."
+    echo "  mkvirtualenv <name>     Create and activate new virtualenv."
+    echo "  rmvirtualenv <name>     Delete existing virtualenv."
     echo "  workon <name>           Activate or switch to a virtual environment."
     echo
     echo "Options:"
@@ -58,8 +58,25 @@ _genma_help() {
 
 
 _genma_do_workon() {
-    # TODO: implement me!
-    echo 'WORKON'
+    if [[ -z $1 ]]; then
+        echo "ERROR: Requires virtualenv"
+        echo
+    else
+        local virtualenv="${GENMA_HOME}/$1"
+
+        if [[ -d "${virtualenv}" ]]; then
+            _genma_do_deactivate
+
+            export GOPATH=$virtualenv
+
+            # add marker into shell prompt so we'll
+            # know we are in virtual environment
+            export PS1="(g:$1)$PS1"
+        else
+            echo "ERROR: Unable to find '$1' virtualenv"
+            echo
+        fi
+    fi
 }
 
 
@@ -71,19 +88,53 @@ _genma_do_lsvirtualenv() {
 
 
 _genma_do_deactivate() {
-    # TODO: implement me!
-    echo 'DEACTIVATE'
+    if [[ ! -z "$GOPATH" ]]; then
+        local marker="(g:$(basename $GOPATH))"
+
+        # remove genma's marker in shell prompt, if any
+        export PS1=${PS1//$marker/}
+
+        unset GOPATH
+    fi
 }
 
 
 _genma_do_mkvirtualenv() {
-    echo 'MKVIRTUALENV'
+    if [[ -z $1 ]]; then
+        echo "ERROR: Requires virtualenv name"
+        echo
+    else
+        _genma_do_deactivate
+
+        local virtualenv=$GENMA_HOME/$1
+        mkdir -p $virtualenv
+        export GOPATH=$virtualenv
+
+        # add marker into shell prompt so we'll
+        # know we are in virtual environment
+        export PS1="(g:$1)$PS1"
+    fi
 }
 
 
 _genma_do_rmvirtualenv() {
-    # TODO: implement me!
-    echo "RMVIRTUALENV"
+    if [[ -z $1 ]]; then
+        echo "ERROR: Requires virtualenv name"
+        echo
+    else
+        local virtualenv=$GENMA_HOME/$1
+
+        if [[ ! -z $GOPATH && $GOPATH == $virtualenv ]]; then
+            echo "ERROR: Cannot remove active virtualenv"
+            echo
+        else
+            if [[ -d $virtualenv ]]; then
+                rm -rf $virtualenv
+            else
+                echo "ERROR: Unable to find '$1' virtualenv"
+            fi
+        fi
+    fi
 }
 
 

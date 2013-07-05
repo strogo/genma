@@ -6,8 +6,8 @@ inspired by Python [virtualenvwrapper][].
 
 [virtualenvwrapper]: https://bitbucket.org/dhellmann/virtualenvwrapper
 
-How To
-------
+How
+---
 
 *   Install:
 
@@ -25,12 +25,17 @@ How To
         Usage: genma <command> [<args>]
 
         Commands:
-          deactivate              Disable active virtual environment.
-          lsvirtualenv            List available virtual environments.
-          mkvirtualenv <name>     Create and activate new virtual environment.
-          rmvirtualenv <name>     Delete existing virtual environment.
-          workon <name>           Activate or switch to a virtual environment.
+          deactivate              Disable active virtualenv.
+          lsvirtualenv            List available virtualenv.
+          mkvirtualenv <name>     Create and activate new virtualenv.
+          rmvirtualenv <name>     Delete existing virtualenv.
+          workon <name>           Activate or switch to a virtualenv.
 
         Options:
           -h, --help              Show help and exit.
           -v, --version           Show version and exit
+
+Todo
+----
+
+* Fixing tab completion
