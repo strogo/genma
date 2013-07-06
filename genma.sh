@@ -20,7 +20,7 @@ genma() {
             _genma_help
             ;;
         "-v"|"--version")
-            echo "genma version ${version}"
+            echo "genma v${version}"
             echo
             ;;
         *)
