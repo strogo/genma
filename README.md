@@ -13,7 +13,7 @@ As [Go][] doesn't have [virtualenv][] like Python does,
 managing Go workspaces manually is quite tedious.
 `genma` aims to automate this process.
 
-[virtualenv]: www.virtualenv.org
+[virtualenv]: http://www.virtualenv.org/
 [Go]: http://golang.org/
 
 How
