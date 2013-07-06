@@ -4,7 +4,7 @@ if [[ "${GENMA_HOME}" = "" ]]; then
 fi
 
 if [[ ! -z $(command -v goenv) ]]; then
-    if [[ "${GOENV_ROOT}" == "" ]]; then
+    if [[ "${GOENV_ROOT}" = "" ]]; then
         export GOENV_ROOT=$(dirname $(command -v goenv) | xargs dirname)
     fi
     export GOROOT=$GOENV_ROOT/versions/$(goenv version)
@@ -146,20 +146,19 @@ _genma_tab_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
     opts="deactivate lsvirtualenv mkvirtualenv rmvirtualenv workon"
 
-    case "${prev}" in
-        workon|rmvirtualenv)
-            COMPREPLY=($(compgen -W "$(_genma_do_lsvirtualenv)" -- ${cur}))
-            return 0
-            ;;
-        lsvirtualenv)
-            return 0
-            ;;
-        deactivate|mkvirtualenv)
-            return 0
-            ;;
-    esac
-
-    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+    if [[ "$COMP_CWORD" -eq 1 ]]; then
+        COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+    else
+        case "${prev}" in
+            workon|rmvirtualenv)
+                COMPREPLY=($(compgen -W "$(_genma_do_lsvirtualenv)" -- ${cur}))
+                return 0
+                ;;
+            deactivate|mkvirtualenv|lsvirtualenv)
+                return 0
+                ;;
+        esac
+    fi
 }
 
 

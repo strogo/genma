@@ -34,8 +34,3 @@ How
         Options:
           -h, --help              Show help and exit.
           -v, --version           Show version and exit
-
-Todo
-----
-
-* Fixing tab completion
