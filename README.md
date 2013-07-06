@@ -1,10 +1,20 @@
 genma
 =====
 
-genma is **G**o (virtual) **EN**vironment **MA**nager,
+`genma` is **G**o (virtual) **EN**vironment **MA**nager,
 inspired by Python [virtualenvwrapper][].
 
 [virtualenvwrapper]: https://bitbucket.org/dhellmann/virtualenvwrapper
+
+Why
+---
+
+As [Go][] doesn't have [virtualenv][] like Python does,
+managing Go workspaces manually is quite tedious.
+`genma` aims to automate this process.
+
+[virtualenv]: www.virtualenv.org
+[Go]: http://golang.org/
 
 How
 ---
@@ -34,3 +44,8 @@ How
         Options:
           -h, --help              Show help and exit.
           -v, --version           Show version and exit
+
+Copyright
+---------
+
+`genma` is offered under MIT license. See `LICENSE.txt` for details.
