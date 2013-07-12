@@ -68,6 +68,8 @@ _genma_do_workon() {
             _genma_do_deactivate
 
             export GOPATH=$virtualenv
+            export GOBIN=$GOPATH/bin
+            export PATH=$GOBIN:$PATH
 
             # add marker into shell prompt so we'll
             # know we are in virtual environment
@@ -93,8 +95,10 @@ _genma_do_deactivate() {
 
         # remove genma's marker in shell prompt, if any
         export PS1=${PS1//$marker/}
+        export PATH=${PATH//$GOBIN/}
 
         unset GOPATH
+        unset GOBIN
     fi
 }
 
@@ -109,6 +113,8 @@ _genma_do_mkvirtualenv() {
         local virtualenv=$GENMA_HOME/$1
         mkdir -p $virtualenv
         export GOPATH=$virtualenv
+        export GOBIN=$GOPATH/bin
+        export PATH=$GOBIN:$PATH
 
         # add marker into shell prompt so we'll
         # know we are in virtual environment
