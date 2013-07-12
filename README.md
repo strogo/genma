@@ -1,5 +1,5 @@
-genma v0.1.0
-============
+genma
+=====
 
 `genma` is **G**o (virtual) **EN**vironment **MA**nager,
 inspired by Python [virtualenvwrapper][].
@@ -30,7 +30,7 @@ See available commands and options:
 
 Then you should see this:
 
-    Go (virtual) ENvironment MAnager v0.1.0
+    Go (virtual) ENvironment MAnager v0.1.1
 
     Usage: genma <command> [<args>]
 

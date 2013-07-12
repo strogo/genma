@@ -13,7 +13,7 @@ fi
 
 genma() {
     local do_func version
-    version="0.1.0"
+    version="0.1.1"
 
     case "$1" in
         ""|"-h"|"--help")
