@@ -16,10 +16,11 @@ managing Go workspaces manually is quite tedious.
 Install
 -------
 
-Preferred setup:
+Preferred setup (using stable version):
 
-    $ git clone git://github.com/iromli/genma.git /path/to/genma
-    $ source /path/to/genma/genma.sh
+    $ git clone git://github.com/iromli/genma.git ~/.genma
+    $ git tag -l | tail -1 | xargs git checkout
+    $ source ~/.genma/genma.sh
 
 Usage
 -----
@@ -28,22 +29,48 @@ See available commands and options:
 
     $ genma -h
 
-Then you should see this:
+Some useful `genma` subcommands are:
 
-    Go (virtual) ENvironment MAnager v0.1.1
+*   `mkvirtualenv <name>`
 
-    Usage: genma <command> [<args>]
+    Create and activate new virtualenv.
 
-    Commands:
-        deactivate              Disable active virtualenv.
-        lsvirtualenv            List available virtualenv.
-        mkvirtualenv <name>     Create and activate new virtualenv.
-        rmvirtualenv <name>     Delete existing virtualenv.
-        workon <name>           Activate or switch to a virtualenv.
+        $ genma mkvirtualenv env
+        (g:env)$
 
-    Options:
-        -h, --help              Show help and exit.
-        -v, --version           Show version and exit
+    If you notice, your shell prompt is prefixed with `(g:env)`.
+    It tells you're in a genma virtualenv.
+
+    Each virtualenv is placed under `$GENMA_HOME`
+    (default to `~/.genma/virtualenv`).
+    Hence if you want a custom path, simply set `$GENMA_HOME` pointed
+    to somewhere else before `genma.sh` is loaded.
+
+*   `deactivate`
+
+    Disable active virtualenv.
+
+        (g:env)$ genma deactivate
+
+*   `lsvirtualenv`
+
+    List available virtualenv.
+
+        $ genma lsvirtualenv
+
+*   `rmvirtualenv <name>`
+
+    Delete existing virtualenv.
+
+        $ genma rmvirtualenv env
+
+    However you can't remove a currently-used virtualenv.
+
+*   `workon <name>`
+
+    Activate or switch to a virtualenv.
+
+        $ genma workon new-env
 
 Copyright
 ---------

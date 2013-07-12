@@ -1,6 +1,6 @@
 # Init all the things!!
 if [[ "${GENMA_HOME}" = "" ]]; then
-    export GENMA_HOME=$HOME/.genma
+    export GENMA_HOME=$HOME/.genma/virtualenv
 fi
 
 if [[ ! -z $(command -v goenv) ]]; then
@@ -13,7 +13,7 @@ fi
 
 genma() {
     local do_func version
-    version="0.1.1"
+    version="0.2.0"
 
     case "$1" in
         ""|"-h"|"--help")
